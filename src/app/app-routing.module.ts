@@ -4,13 +4,15 @@ import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { PostsComponent } from './modules/posts/posts.component';
 import {LoginComponent} from './modules/login/login.component';
+import {BancosComponent} from './modules/bancos/bancos.component';
+import {AuthGuard} from './helpers/auth.guard';
 
 const routes: Routes = [{
   path: '',
   component: DefaultComponent,
   children: [
     {
-    path: '',
+    path: 'dashboard',
     component: DashboardComponent
     },
     {
@@ -20,6 +22,11 @@ const routes: Routes = [{
     {
       path: 'login',
       component: LoginComponent
+    },
+    {
+      path: 'bancos',
+      component: BancosComponent,
+      canActivate: [AuthGuard]
     }
     ]
 }];
