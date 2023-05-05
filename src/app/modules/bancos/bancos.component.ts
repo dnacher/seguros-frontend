@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {BancosService} from '../../service/bancos.service';
+import {BancoService} from '../../service/bancos.service';
 import {Banco} from '../../model/Banco';
 
 @Component({
@@ -10,7 +10,7 @@ import {Banco} from '../../model/Banco';
 
   displayedColumns: string[] = ['nombre', 'descripcion'];
   bancos: Banco[];
-  constructor(private bancoService: BancosService) { }
+  constructor(private bancoService: BancoService) { }
 
   loadData(){
     this.bancoService.getBancos().subscribe(

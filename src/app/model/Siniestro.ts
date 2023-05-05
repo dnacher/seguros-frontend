@@ -2,7 +2,7 @@ import {Cliente} from './Cliente';
 import {Poliza} from './Poliza';
 import {EstadoSiniestro} from './EstadoSiniestro';
 
-export interface EstadoPoliza {
+export interface Siniestro {
   id: number;
   uuid: string;
   cliente: Cliente;

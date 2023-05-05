@@ -1,6 +1,6 @@
 import {TipoUsuario} from './TipoUsuario';
 
-export interface EstadoPoliza {
+export interface PermisoUsuario {
   id: number;
   uuid: string;
   tipoUsuario: TipoUsuario;
