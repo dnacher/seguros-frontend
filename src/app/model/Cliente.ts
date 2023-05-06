@@ -1,4 +1,4 @@
-export interface Cliente {
+export class Cliente {
   id: number;
   clienteUuid: string;
   nombre: string;
@@ -17,5 +17,4 @@ export interface Cliente {
   rut: string;
   observaciones: string;
   activo: boolean;
-
 }

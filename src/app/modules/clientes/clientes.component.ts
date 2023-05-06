@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {BancoService} from '../../service/banco.service';
-import {Banco} from '../../model/Banco';
+import {ClientesService} from '../../service/cliente.service';
+import {Cliente} from '../../model/Cliente';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material';
@@ -8,19 +8,23 @@ import {MatDialog} from '@angular/material/dialog';
 import {CoreService} from '../../service/core.service';
 
 @Component({
-  selector: 'app-bancos',
-  templateUrl: './bancos.component.html',
-  styleUrls: ['./bancos.component.scss']
-})export class BancosComponent implements OnInit {
+  selector: 'app-clientes',
+  templateUrl: './clientes.component.html',
+  styleUrls: ['./clientes.component.scss']
+})export class ClienteComponent implements OnInit {
 
-  botonAgregar = 'Agregar Banco';
-  titulo = 'Bancos';
-  tituloFormulario = 'Banco';
-  banco: Banco = new Banco();
+  botonAgregar = 'Agregar Cliente';
+  titulo = 'Clientes';
+  cliente: Cliente = new Cliente();
   displayedColumns: string[] = [
     'id',
     'nombre',
-    'descripcion',
+    'apellido',
+    'direccion',
+    'ciudad',
+    'departamento',
+    'fechaNacimiento',
+    'telefono',
     'action',
   ];
   displayTable = true;
@@ -30,20 +34,20 @@ import {CoreService} from '../../service/core.service';
 
 
   constructor(private dialog: MatDialog,
-              private bancoService: BancoService,
+              private clienteService: ClientesService,
               private coreService: CoreService) { }
 
   ngOnInit() {
-    this.getBancos();
+    this.getClientes();
   }
 
   agregar() {
-    this.banco = new Banco();
+    this.cliente = new Cliente();
     this.displayTable = false;
   }
 
-  getBancos() {
-    this.bancoService.getBancos().subscribe({
+  getClientes() {
+    this.clienteService.getClientes().subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
@@ -62,30 +66,30 @@ import {CoreService} from '../../service/core.service';
     }
   }
 
-  deleteBanco(id: number) {
-    this.bancoService.deleteBancoById(id).subscribe({
+  deleteCliente(id: number) {
+    this.clienteService.deleteClienteById(id).subscribe({
       next: (res) => {
-        this.coreService.openSnackBar('Banco Eliminado', 'done');
-        this.getBancos();
+        this.coreService.openSnackBar('Cliente Eliminado', 'done');
+        this.getClientes();
       },
       error: console.log,
     });
   }
 
   openEditForm(data: any) {
-    this.banco = data;
+    this.cliente = data;
     this.displayTable = false;
   }
 
   onFormSubmit() {
-    if (this.banco) {
-      console.log(this.banco);
-      if (this.banco.id) {
-        this.bancoService
-          .updateBanco(this.banco.id, this.banco)
+    if (this.cliente) {
+      console.log(this.cliente);
+      if (this.cliente.id) {
+        this.clienteService
+          .updateCliente(this.cliente.id, this.cliente)
           .subscribe({
             next: (val: any) => {
-              this.coreService.openSnackBar('Banco Actualizado');
+              this.coreService.openSnackBar('Cliente Actualizado');
               this.displayTable = true;
             },
             error: (err: any) => {
@@ -93,10 +97,10 @@ import {CoreService} from '../../service/core.service';
             },
           });
       } else {
-        this.bancoService.saveBanco(this.banco).subscribe({
+        this.clienteService.saveCliente(this.cliente).subscribe({
           next: (val: any) => {
-            this.coreService.openSnackBar('Banco Agregado');
-            this.getBancos();
+            this.coreService.openSnackBar('Cliente Agregado');
+            this.getClientes();
             this.displayTable = true;
           },
           error: (err: any) => {

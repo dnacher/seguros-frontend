@@ -1,4 +1,5 @@
-export interface Banco {
+export class Banco {
+  id: number;
   nombre: string;
   descripcion: string;
 }
