@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Banco} from '../model/Banco';
+import {CuotaPoliza} from '../model/CuotaPoliza';
 
 @Injectable({
   providedIn: 'root'
@@ -17,20 +18,20 @@ export class CuotaPolizaService {
     return this.http.get(`${this.baseUrl}` + '/');
   }
 
-  getCuotaPolizaById(bancoId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}` + `/${bancoId}`);
+  getCuotaPolizaById(cuotaPolizaId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}` + `/${cuotaPolizaId}`);
   }
 
-  saveBanco(banco: Banco): Observable<any> {
-    return this.http.post(`${this.baseUrl}` + `/`, banco);
+  saveCuotaPoliza(cuotaPoliza: CuotaPoliza): Observable<any> {
+    return this.http.post(`${this.baseUrl}` + `/`, cuotaPoliza);
   }
 
-  deleteBancoById(id: number): Observable<any> {
+  deleteCuotaPolizaById(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}` + `/${id}`);
   }
 
-  updateBanco(id: number, banco: Banco): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, banco);
+  updateCuotaPoliza(id: number, cuotaPoliza: CuotaPoliza): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, cuotaPoliza);
   }
 
 }

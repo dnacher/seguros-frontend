@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Router} from '@angular/router';
+import {ApiService} from '../../../service/api.service';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +11,10 @@ export class HeaderComponent implements OnInit {
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) { }
 
   logout() {
-    localStorage.removeItem('token');
+    this.apiService.logout();
     this.router.navigate(['login']);
   }
 

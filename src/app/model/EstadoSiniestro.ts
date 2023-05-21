@@ -1,4 +1,4 @@
-export interface EstadoSiniestro {
+export class EstadoSiniestro {
   id: number;
   uuid: string;
   nombre: string;

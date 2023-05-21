@@ -1,6 +1,6 @@
 import {Banco} from './Banco';
 
-export interface Ingreso {
+export class Ingreso {
   id: number;
   uuid: string;
   mes: number;

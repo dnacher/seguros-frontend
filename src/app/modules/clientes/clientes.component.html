@@ -93,12 +93,90 @@
           <mat-label>Nombre</mat-label>
           <input matInput type="text" placeholder="Nombre" [(ngModel)]="cliente.nombre" name="nombre">
         </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input matInput type="text" placeholder="Apellido" [(ngModel)]="cliente.apellido" name="apellido">
+        </mat-form-field>
       </div>
 
       <div class="row">
         <mat-form-field appearance="outline">
-          <mat-label>Descripcion</mat-label>
-          <input matInput type="text" placeholder="Descripcion" [(ngModel)]="cliente.apellido" name="descripcion">
+          <mat-label>Direccion</mat-label>
+          <input matInput type="text" placeholder="Direccion" [(ngModel)]="cliente.direccion" name="direccion">
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad</mat-label>
+          <input matInput type="text" placeholder="Ciudad" [(ngModel)]="cliente.ciudad" name="ciudad">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Departamento</mat-label>
+          <input matInput type="text" placeholder="Departamento" [(ngModel)]="cliente.departamento" name="departamento">
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha Nacimiento</mat-label>
+          <input matInput [(ngModel)]="cliente.fechaNacimiento" [ngModelOptions]="{standalone: true}" [matDatepicker]="fechaNacimiento">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="fechaNacimiento"></mat-datepicker-toggle>
+          <mat-datepicker #fechaNacimiento></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Telefono</mat-label>
+          <input matInput type="text" placeholder="Telefono" [(ngModel)]="cliente.telefono" name="telefono">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Celular</mat-label>
+          <input matInput type="text" placeholder="Celular" [(ngModel)]="cliente.celular" name="celular">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" placeholder="Email" [(ngModel)]="cliente.email" name="email">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Cedula Identidad</mat-label>
+          <input matInput type="text" placeholder="Cedula Identidad" [(ngModel)]="cliente.cedulaIdentidad" name="cedulaIdentidad">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Libreta Propiedad</mat-label>
+          <input matInput type="text" placeholder="Libreta Propiedad" [(ngModel)]="cliente.libretaPropiedad" name="libretaPropiedad">
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha Comienzo</mat-label>
+          <input matInput [(ngModel)]="cliente.fechaComienzo" [ngModelOptions]="{standalone: true}" [matDatepicker]="fechaComienzo">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="fechaComienzo"></mat-datepicker-toggle>
+          <mat-datepicker #fechaComienzo></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>RUT</mat-label>
+          <input matInput type="text" placeholder="RUT" [(ngModel)]="cliente.rut" name="rut">
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Observaciones</mat-label>
+          <textarea matInput placeholder="Observaciones" [(ngModel)]="cliente.observaciones" [ngModelOptions]="{standalone: true}"></textarea>
         </mat-form-field>
       </div>
     </div>

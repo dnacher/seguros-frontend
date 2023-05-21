@@ -1,4 +1,4 @@
-export interface FormaPago {
+export class FormaPago {
   id: number;
   uuid: string;
   nombre: string;

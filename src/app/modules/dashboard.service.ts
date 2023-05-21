@@ -27,39 +27,39 @@ export class DashboardService {
   }
 
   cards() {
-    return [71, 78, 39, 66];
+    return [71, 78, 39, 106];
   }
 
   pieChart() {
     return [{
       name: 'Chrome',
-      y: 61.41,
+      y: 140.00,
       sliced: true,
       selected: true
     }, {
-      name: 'Internet Explorer',
-      y: 11.84
+      name: 'Pepito porque no existe mas',
+      y: 10.00
     }, {
       name: 'Firefox',
-      y: 10.85
+      y: 3.00
     }, {
       name: 'Edge',
-      y: 4.67
+      y:  4.00
     }, {
       name: 'Safari',
-      y: 4.18
+      y: 3.00
     }, {
       name: 'Sogou Explorer',
-      y: 1.64
+      y: 2.00
     }, {
       name: 'Opera',
-      y: 1.6
+      y: 2.0
     }, {
       name: 'QQ',
-      y: 1.2
+      y: 2.0
     }, {
       name: 'Other',
-      y: 2.61
+      y: 4.0
     }];
   }
 }

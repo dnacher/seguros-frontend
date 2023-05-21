@@ -1,4 +1,4 @@
-export interface Compania {
+export class Compania {
   id: number;
   uuid: string;
   nombre: string;

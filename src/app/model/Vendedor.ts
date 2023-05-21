@@ -1,4 +1,4 @@
-export interface Vendedor {
+export class Vendedor {
   id: number;
   uuid: string;
   nombre: string;

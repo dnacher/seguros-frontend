@@ -1,4 +1,4 @@
-export interface TipoProducto {
+export class TipoProducto {
   id: number;
   uuid: string;
   nombre: string;

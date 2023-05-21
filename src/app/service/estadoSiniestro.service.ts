@@ -21,15 +21,15 @@ export class EstadoSiniestroService {
     return this.http.get(`${this.baseUrl}` + `/${bancoId}`);
   }
 
-  saveBanco(banco: Banco): Observable<any> {
+  saveEstadoSiniestro(banco: Banco): Observable<any> {
     return this.http.post(`${this.baseUrl}` + `/`, banco);
   }
 
-  deleteBancoById(id: number): Observable<any> {
+  deleteEstadoSiniestroById(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}` + `/${id}`);
   }
 
-  updateBanco(id: number, banco: Banco): Observable<any> {
+  updateEstadoSiniestro(id: number, banco: Banco): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, banco);
   }
 

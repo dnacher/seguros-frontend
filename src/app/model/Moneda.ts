@@ -1,4 +1,4 @@
-export interface Moneda {
+export class Moneda {
   id: number;
   uuid: string;
   nombre: string;

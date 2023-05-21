@@ -7,7 +7,7 @@ import {PermisoUsuario} from '../model/PermisoUsuario';
   providedIn: 'root'
 })
 
-export class PermisoUsuariosService {
+export class PermisoUsuarioService {
   private baseUrl = 'http://localhost:8080/api/v1/permiso-usuarios';
 
   constructor(private http: HttpClient) {

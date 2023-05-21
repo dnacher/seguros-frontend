@@ -30,7 +30,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {HttpClientModule} from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {EmpAddEditComponent} from '../../modules/emp-add-edit/emp-add-edit.component';
 
 @NgModule({
   declarations: [

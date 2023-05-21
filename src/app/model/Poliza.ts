@@ -8,7 +8,7 @@ import {EstadoPoliza} from './EstadoPoliza';
 import {CotizacionVendedor} from './CotizacionVendedor';
 import {RegistroCuotas} from './RegistroCuotas';
 
-export interface Poliza {
+export class Poliza {
   id: number;
   uuid: string;
   compania: Compania;

@@ -1,7 +1,7 @@
 import {Producto} from './Producto';
 import {Vendedor} from './Vendedor';
 
-export interface CotizacionVendedor {
+export class CotizacionVendedor {
   id: number;
   uuid: number;
   producto: Producto;

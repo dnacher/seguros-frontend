@@ -1,6 +1,6 @@
 import {Poliza} from './Poliza';
 
-export interface CuotaPoliza {
+export class CuotaPoliza {
   id: number;
   uuid: string;
   poliza: Poliza;

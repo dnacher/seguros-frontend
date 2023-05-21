@@ -7,7 +7,7 @@ import {Poliza} from '../model/Poliza';
   providedIn: 'root'
 })
 
-export class PolizasService {
+export class PolizaService {
   private baseUrl = 'http://localhost:8080/api/v1/polizas';
 
   constructor(private http: HttpClient) {

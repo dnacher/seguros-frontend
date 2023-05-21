@@ -21,6 +21,10 @@ export class UsuarioService {
     return this.http.get(`${this.baseUrl}` + `/${usuarioId}`);
   }
 
+  getUsuariosByNombre(usuarioNombre: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}` + `/nombre/${usuarioNombre}`);
+  }
+
   saveUsuario(usuario: Usuario): Observable<any> {
     return this.http.post(`${this.baseUrl}` + `/`, usuario);
   }

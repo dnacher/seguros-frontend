@@ -1,6 +1,6 @@
 import {TipoUsuario} from './TipoUsuario';
 
-export interface Usuario {
+export class Usuario {
   id: number;
   uuid: string;
   nombre: string;

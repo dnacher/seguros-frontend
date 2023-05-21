@@ -1,7 +1,7 @@
 import {Compania} from './Compania';
 import {TipoProducto} from './TipoProducto';
 
-export interface Producto {
+export class Producto {
   id: number;
   uuid: string;
   nombre: string;
