@@ -15,10 +15,12 @@ export class ApiService {
   usuario: Usuario = new Usuario();
   public user: string;
   public userType: string;
+  public pic: string;
 
   constructor(private http: HttpClient, private usarioService: UsuarioService) {
     this.user = localStorage.getItem('usuarioNombre');
     this.userType = localStorage.getItem('tipoUsuario');
+    this.pic = localStorage.getItem('pic');
   }
 
   login(creds: Credentials) {
@@ -36,6 +38,7 @@ export class ApiService {
         next: (res) => {
           localStorage.setItem('usuarioNombre', res.nombre);
           localStorage.setItem('tipoUsuario', res.tipoUsuario.nombre);
+          localStorage.setItem('pic', 'https://material.angular.io/assets/img/examples/shiba2.jpg');
           this.user = res.nombre;
           this.userType = res.tipoUsuario.nombre;
         },
@@ -53,6 +56,7 @@ export class ApiService {
     localStorage.removeItem('token');
     localStorage.removeItem('usuarioNombre');
     localStorage.removeItem('tipoUsuario');
+    localStorage.removeItem('pic');
     this.user = '';
     this.userType = '';
   }

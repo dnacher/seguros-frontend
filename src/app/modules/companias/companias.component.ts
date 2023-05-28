@@ -18,9 +18,13 @@ import {CompaniasService} from '../../service/compania..service';
   tituloFormulario = 'Compañia';
   compania: Compania = new Compania();
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
     'descripcion',
+    'email',
+    'telfono',
+    'web',
+    'numeroAuxilio',
     'action',
   ];
   displayTable = true;

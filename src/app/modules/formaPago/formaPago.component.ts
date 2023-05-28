@@ -18,7 +18,7 @@ import {FormaPagoService} from '../../service/formaPagos..service';
   tituloFormulario = 'Forma Pago';
   formaPago: FormaPago = new FormaPago();
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
     'descripcion',
     'action',

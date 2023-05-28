@@ -1,6 +1,8 @@
 export class Cliente {
   id: number;
-  clienteUuid: string;
+  uuid: string;
+  created: Date;
+  updated: Date;
   nombre: string;
   apellido: string;
   direccion: string;

@@ -11,6 +11,8 @@ import {RegistroCuotas} from './RegistroCuotas';
 export class Poliza {
   id: number;
   uuid: string;
+  created: Date;
+  updated: Date;
   compania: Compania;
   cliente: Cliente;
   numeroPoliza: string;

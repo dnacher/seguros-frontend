@@ -3,7 +3,9 @@ import {Vendedor} from './Vendedor';
 
 export class CotizacionVendedor {
   id: number;
-  uuid: number;
+  uuid: string;
+  created: Date;
+  updated: Date;
   producto: Producto;
   vendedor: Vendedor;
   comisionNueva: number;

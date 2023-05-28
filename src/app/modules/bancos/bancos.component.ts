@@ -18,7 +18,7 @@ import {CoreService} from '../../service/core.service';
   tituloFormulario = 'Banco';
   banco: Banco = new Banco();
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
     'descripcion',
     'action',
@@ -86,6 +86,7 @@ import {CoreService} from '../../service/core.service';
           .subscribe({
             next: (val: any) => {
               this.coreService.openSnackBar('Banco Actualizado');
+              this.getBancos();
               this.displayTable = true;
             },
             error: (err: any) => {

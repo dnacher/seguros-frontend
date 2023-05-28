@@ -18,7 +18,7 @@ import {CoreService} from '../../service/core.service';
   tituloFormulario = 'Estado Poliza';
   estadoPoliza: EstadoPoliza = new EstadoPoliza();
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
     'descripcion',
     'action',

@@ -17,9 +17,9 @@
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort >
 
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      <ng-container matColumnDef="uuid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> UUID </th>
+        <td mat-cell *matCellDef="let row"> {{row.uuid}} </td>
       </ng-container>
       <!-- ID Column -->
       <ng-container matColumnDef="nombre">
@@ -66,20 +66,20 @@
       <div class="row">
         <mat-form-field appearance="outline">
           <mat-label>Nombre</mat-label>
-          <input matInput type="text" placeholder="Nombre" [(ngModel)]="banco.nombre" name="nombre">
+          <input matInput type="text" placeholder="Nombre" [(ngModel)]="formaPago.nombre" name="nombre">
         </mat-form-field>
       </div>
 
       <div class="row">
         <mat-form-field appearance="outline">
           <mat-label>Descripcion</mat-label>
-          <input matInput type="text" placeholder="Descripcion" [(ngModel)]="banco.descripcion" name="descripcion">
+          <input matInput type="text" placeholder="Descripcion" [(ngModel)]="formaPago.descripcion" name="descripcion">
         </mat-form-field>
       </div>
     </div>
     <div mat-dialog-actions class="action">
       <button mat-raised-button type="button" (click)="closeCRUD()">Cancel</button>
-      <button mat-raised-button color="primary" type="submit">{{banco.id ? 'Update': 'Save'}}</button>
+      <button mat-raised-button color="primary" type="submit">{{formaPago.id ? 'Update': 'Save'}}</button>
     </div>
   </form>
 </div>

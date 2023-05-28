@@ -17,9 +17,9 @@
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort >
 
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      <ng-container matColumnDef="uuid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> UUID </th>
+        <td mat-cell *matCellDef="let row"> {{row.uuid}} </td>
       </ng-container>
       <!-- ID Column -->
       <ng-container matColumnDef="nombre">
@@ -31,6 +31,26 @@
       <ng-container matColumnDef="descripcion">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
         <td mat-cell *matCellDef="let row"> {{row.descripcion}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="telfono">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Telfono </th>
+        <td mat-cell *matCellDef="let row"> {{row.telfono}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="web">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Web </th>
+        <td mat-cell *matCellDef="let row"> {{row.web}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="numeroAuxilio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Numero auxilio </th>
+        <td mat-cell *matCellDef="let row"> {{row.numeroAuxilio}}</td>
       </ng-container>
 
       <ng-container matColumnDef="action">
@@ -69,11 +89,34 @@
           <input matInput type="text" placeholder="Nombre" [(ngModel)]="compania.nombre" name="nombre">
         </mat-form-field>
       </div>
-
       <div class="row">
         <mat-form-field appearance="outline">
           <mat-label>Descripcion</mat-label>
           <input matInput type="text" placeholder="Descripcion" [(ngModel)]="compania.descripcion" name="descripcion">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" placeholder="Email" [(ngModel)]="compania.email" name="email">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Telefono</mat-label>
+          <input matInput type="text" placeholder="Telefono" [(ngModel)]="compania.telfono" name="telefono">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Web</mat-label>
+          <input matInput type="text" placeholder="Web" [(ngModel)]="compania.web" name="web">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Numero de auxilio</mat-label>
+          <input matInput type="text" placeholder="Numero de auxilio" [(ngModel)]="compania.numeroAuxilio" name="numeroAuxilio">
         </mat-form-field>
       </div>
     </div>

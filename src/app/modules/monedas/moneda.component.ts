@@ -18,9 +18,9 @@ import {MonedasService} from '../../service/moneda.service';
   tituloFormulario = 'Moneda';
   moneda: Moneda = new Moneda();
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
-    'descripcion',
+    'simbolo',
     'action',
   ];
   displayTable = true;

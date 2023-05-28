@@ -8,7 +8,7 @@ import {FormaPago} from '../model/FormaPago';
 })
 
 export class FormaPagoService {
-  private baseUrl = 'http://localhost:8080/api/v1/forma-pago';
+  private baseUrl = 'http://localhost:8080/api/v1/forma-pagos';
 
   constructor(private http: HttpClient) {
   }

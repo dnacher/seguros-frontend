@@ -16,10 +16,18 @@ import {CoreService} from '../../service/core.service';
   botonAgregar = 'Agregar Cliente';
   titulo = 'Clientes';
   cliente: Cliente = new Cliente();
+  nombreRecomendado = '';
+  displayedColumnsRecomendado: string[] = [
+    'nombre',
+    'direccion',
+    'ciudad',
+    'departamento',
+    'telefono',
+    'action',
+  ];
   displayedColumns: string[] = [
     'id',
     'nombre',
-    'apellido',
     'direccion',
     'ciudad',
     'departamento',
@@ -27,10 +35,15 @@ import {CoreService} from '../../service/core.service';
     'telefono',
     'action',
   ];
-  displayTable = true;
+  panelTable = true;
+  panelRecomendado = false;
+  panelCRUD = false;
   dataSource!: MatTableDataSource<any>;
+  dataSourceRecomendado!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static : false}) sort!: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginatorRecomnedado!: MatPaginator;
+  @ViewChild(MatSort, {static : false}) sortRecomendado!: MatSort;
 
 
   constructor(private dialog: MatDialog,
@@ -38,18 +51,21 @@ import {CoreService} from '../../service/core.service';
               private coreService: CoreService) { }
 
   ngOnInit() {
+    this.cliente = new Cliente();
     this.getClientes();
+    this.mostrarTabla();
   }
 
   agregar() {
     this.cliente = new Cliente();
-    this.displayTable = false;
+    this.mostrarCRUD();
   }
 
   getClientes() {
     this.clienteService.getClientes().subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
+        this.dataSourceRecomendado = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
@@ -78,7 +94,7 @@ import {CoreService} from '../../service/core.service';
 
   openEditForm(data: any) {
     this.cliente = data;
-    this.displayTable = false;
+    this.mostrarCRUD();
   }
 
   onFormSubmit() {
@@ -90,7 +106,7 @@ import {CoreService} from '../../service/core.service';
           .subscribe({
             next: (val: any) => {
               this.coreService.openSnackBar('Cliente Actualizado');
-              this.displayTable = true;
+              this.mostrarTabla();
             },
             error: (err: any) => {
               console.error(err);
@@ -101,7 +117,7 @@ import {CoreService} from '../../service/core.service';
           next: (val: any) => {
             this.coreService.openSnackBar('Cliente Agregado');
             this.getClientes();
-            this.displayTable = true;
+            this.mostrarTabla();
           },
           error: (err: any) => {
             console.error(err);
@@ -112,7 +128,41 @@ import {CoreService} from '../../service/core.service';
   }
 
   closeCRUD() {
-    this.displayTable = true;
+    this.mostrarTabla();
+  }
+
+  mostrarCRUD() {
+    this.panelRecomendado = false;
+    this.panelTable = false;
+    this.panelCRUD = true;
+  }
+
+  mostrarRecomendados() {
+    console.log(this.dataSourceRecomendado.data.length);
+    this.panelRecomendado = true;
+    this.panelTable = false;
+    this.panelCRUD = false;
+  }
+
+  mostrarTabla() {
+    this.panelRecomendado = false;
+    this.panelTable = true;
+    this.panelCRUD = false;
+  }
+
+  setRecomendado(row) {
+    console.log('entre ');
+    this.cliente.recomendadoPor = row;
+    this.nombreRecomendado = this.getRecomendadoPor();
+    this.mostrarCRUD();
+  }
+
+  getRecomendadoPor() {
+    if (this.cliente.recomendadoPor) {
+      return this.cliente.recomendadoPor.nombre + ' ' + this.cliente.recomendadoPor.apellido;
+    } else {
+      return '';
+    }
   }
 
 }

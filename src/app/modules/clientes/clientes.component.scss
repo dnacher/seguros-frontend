@@ -19,3 +19,13 @@
 table {
   width: 100%;
 }
+
+.table mat-row:hover {
+  border-color: currentColor;
+}
+
+.table mat-row {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}

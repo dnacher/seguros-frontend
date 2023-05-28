@@ -18,7 +18,7 @@ import {CoreService} from '../../service/core.service';
   tituloFormulario = 'Tipo de Producto';
   tipoProducto: TipoProducto = new TipoProducto();
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
     'descripcion',
     'action',

@@ -6,83 +6,141 @@
   </button>
 </mat-toolbar>
 
+  <div class="main-body" *ngIf="panelRecomendado">
+    <mat-form-field>
+      <mat-label>Filtro</mat-label>
+      <input matInput (keyup)="filtro($event)" placeholder="Filtro" #input>
+    </mat-form-field>
 
-<div class="main-body" *ngIf="displayTable">
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
 
-  <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="filtro($event)" placeholder="Filtro" #input>
-  </mat-form-field>
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombre}} {{row.apellido}}</td>
+        </ng-container>
 
-  <div class="table-container">
-    <table mat-table [dataSource]="dataSource" matSort >
+        <ng-container matColumnDef="direccion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </th>
+          <td mat-cell *matCellDef="let row"> {{row.direccion}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-      </ng-container>
-      <!-- ID Column -->
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-        <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
-      </ng-container>
+        <ng-container matColumnDef="ciudad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciudad </th>
+          <td mat-cell *matCellDef="let row"> {{row.ciudad}}</td>
+        </ng-container>
 
-      <!-- Progress Column -->
-      <ng-container matColumnDef="apellido">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
-        <td mat-cell *matCellDef="let row"> {{row.apellido}}</td>
-      </ng-container>
+        <ng-container matColumnDef="departamento">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+          <td mat-cell *matCellDef="let row"> {{row.departamento}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="direccion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </th>
-        <td mat-cell *matCellDef="let row"> {{row.direccion}}</td>
-      </ng-container>
+        <ng-container matColumnDef="fechaNacimiento">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de nacimiento </th>
+          <td mat-cell *matCellDef="let row"> {{row.fechaNacimiento| date:'dd/MM/yyyy'}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="ciudad">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciudad </th>
-        <td mat-cell *matCellDef="let row"> {{row.ciudad}}</td>
-      </ng-container>
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
+          <td mat-cell *matCellDef="let row"> {{row.telefono}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="departamento">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
-        <td mat-cell *matCellDef="let row"> {{row.departamento}}</td>
-      </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Accion </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)="setRecomendado(row)">
+              <mat-icon>assignment_turned_in</mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="fechaNacimiento">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de nacimiento </th>
-        <td mat-cell *matCellDef="let row"> {{row.fechaNacimiento| date:'dd/MM/yyyy'}}</td>
-      </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      <ng-container matColumnDef="telefono">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
-        <td mat-cell *matCellDef="let row"> {{row.telefono}}</td>
-      </ng-container>
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay informacion con este filtro "{{input.value}}"</td>
+        </tr>
+      </table>
 
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Accion </th>
-        <td mat-cell *matCellDef="let row">
-          <button mat-icon-button color="primary" (click)="openEditForm(row)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="deleteCliente(row.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+    </div>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-      <!-- Row shown when there is no matching data. -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No hay informacion con este filtro "{{input.value}}"</td>
-      </tr>
-    </table>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
   </div>
+
+  <div class="main-body" *ngIf="panelTable">
+    tab
+    <mat-form-field>
+      <mat-label>Filtro</mat-label>
+      <input matInput (keyup)="filtro($event)" placeholder="Filtro" #input>
+    </mat-form-field>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombre}} {{row.apellido}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="direccion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </th>
+          <td mat-cell *matCellDef="let row"> {{row.direccion}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ciudad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciudad </th>
+          <td mat-cell *matCellDef="let row"> {{row.ciudad}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="departamento">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+          <td mat-cell *matCellDef="let row"> {{row.departamento}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaNacimiento">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de nacimiento </th>
+          <td mat-cell *matCellDef="let row"> {{row.fechaNacimiento| date:'dd/MM/yyyy'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
+          <td mat-cell *matCellDef="let row"> {{row.telefono}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Accion </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)="openEditForm(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteCliente(row.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay informacion con este filtro "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
 </div>
-<div class="main-body" *ngIf="!displayTable">
+
+<div class="main-body" *ngIf="panelCRUD">
   <div mat-dialog-title>
     <h2>Cliente</h2>
   </div>
@@ -154,6 +212,14 @@
         <mat-form-field appearance="outline">
           <mat-label>Libreta Propiedad</mat-label>
           <input matInput type="text" placeholder="Libreta Propiedad" [(ngModel)]="cliente.libretaPropiedad" name="libretaPropiedad">
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-icon (click)="mostrarRecomendados()" matPrefix>search</mat-icon>
+          <mat-label>Recomendado por </mat-label>
+          <input [disabled]="true" matInput type="text" placeholder="Recomendado por " [(ngModel)]="nombreRecomendado" name="recomendadoPor">
         </mat-form-field>
       </div>
 

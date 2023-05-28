@@ -4,6 +4,8 @@ import {TipoProducto} from './TipoProducto';
 export class Producto {
   id: number;
   uuid: string;
+  created: Date;
+  updated: Date;
   nombre: string;
   descripcion: string;
   compania: Compania;

@@ -5,6 +5,8 @@ import {EstadoSiniestro} from './EstadoSiniestro';
 export class Siniestro {
   id: number;
   uuid: string;
+  created: Date;
+  updated: Date;
   cliente: Cliente;
   numeroSiniestro: string;
   poliza: Poliza;

@@ -18,7 +18,7 @@ import {CoreService} from '../../service/core.service';
   tituloFormulario = 'Estado Siniestro';
   estadoSiniestro: EstadoSiniestro = new EstadoSiniestro();
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
     'descripcion',
     'action',
