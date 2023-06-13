@@ -1,8 +1,7 @@
-export class Moneda {
+import {AbstractDomainEntity} from './AbstractDomainEntity';
+
+export class Moneda extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   nombre: string;
   simbolo: string;
 }

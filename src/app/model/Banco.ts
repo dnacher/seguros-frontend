@@ -1,8 +1,7 @@
-export class Banco {
+import {AbstractDomainEntity} from './AbstractDomainEntity';
+
+export class Banco extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   nombre: string;
   descripcion: string;
 }

@@ -1,8 +1,7 @@
-export class FormaPago {
+import {AbstractDomainEntity} from './AbstractDomainEntity';
+
+export class FormaPago extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   nombre: string;
   descripcion: string;
 }

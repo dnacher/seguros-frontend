@@ -1,11 +1,9 @@
 import {Producto} from './Producto';
 import {Vendedor} from './Vendedor';
+import {AbstractDomainEntity} from './AbstractDomainEntity';
 
-export class CotizacionVendedor {
+export class CotizacionVendedor extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   producto: Producto;
   vendedor: Vendedor;
   comisionNueva: number;

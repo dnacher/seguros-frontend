@@ -1,12 +1,10 @@
 import {Cliente} from './Cliente';
 import {Poliza} from './Poliza';
 import {EstadoSiniestro} from './EstadoSiniestro';
+import {AbstractDomainEntity} from './AbstractDomainEntity';
 
-export class Siniestro {
+export class Siniestro extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   cliente: Cliente;
   numeroSiniestro: string;
   poliza: Poliza;

@@ -1,10 +1,8 @@
 import {Banco} from './Banco';
+import {AbstractDomainEntity} from './AbstractDomainEntity';
 
-export class Ingreso {
+export class Ingreso extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   mes: number;
   anio: number;
   banco: Banco;

@@ -1,10 +1,8 @@
 import {TipoUsuario} from './TipoUsuario';
+import {AbstractDomainEntity} from './AbstractDomainEntity';
 
-export class PermisoUsuario {
+export class PermisoUsuario extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   tipoUsuario: TipoUsuario;
   pagina: string;
   permiso: number;

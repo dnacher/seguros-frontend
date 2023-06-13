@@ -1,8 +1,7 @@
-export class Compania {
+import {AbstractDomainEntity} from './AbstractDomainEntity';
+
+export class Compania extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   nombre: string;
   descripcion: string;
   email: string;

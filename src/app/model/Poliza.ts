@@ -7,12 +7,10 @@ import {FormaPago} from './FormaPago';
 import {EstadoPoliza} from './EstadoPoliza';
 import {CotizacionVendedor} from './CotizacionVendedor';
 import {RegistroCuotas} from './RegistroCuotas';
+import {AbstractDomainEntity} from './AbstractDomainEntity';
 
-export class Poliza {
+export class Poliza extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   compania: Compania;
   cliente: Cliente;
   numeroPoliza: string;

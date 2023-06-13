@@ -1,8 +1,7 @@
-export class Vendedor {
+import {AbstractDomainEntity} from './AbstractDomainEntity';
+
+export class Vendedor extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   nombre: string;
   apellido: string;
   direccion: string;

@@ -17,13 +17,30 @@ import {CoreService} from '../../service/core.service';
   titulo = 'Productos';
   tituloFormulario = 'Producto';
   producto: Producto = new Producto();
+  panelCRUD = false;
+  panelCompania = false;
+  panelProductos = false;
+
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
     'descripcion',
+    'compania',
+    'tipoProducto',
+    'comisionNueva',
+    'comisionRenovacion',
     'action',
   ];
-  displayTable = true;
+  columnaProducto: string[] = [
+    'uuid',
+    'nombre',
+    'descripcion',
+    'email',
+    'telfono',
+    'web',
+    'numeroAuxilio',
+    'action',
+  ];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static : false}) sort!: MatSort;
@@ -39,7 +56,7 @@ import {CoreService} from '../../service/core.service';
 
   agregar() {
     this.producto = new Producto();
-    this.displayTable = false;
+    this.mostrarCRUD();
   }
 
   getProductos() {
@@ -74,7 +91,7 @@ import {CoreService} from '../../service/core.service';
 
   openEditForm(data: any) {
     this.producto = data;
-    this.displayTable = false;
+    this.mostrarCRUD();
   }
 
   onFormSubmit() {
@@ -86,7 +103,7 @@ import {CoreService} from '../../service/core.service';
           .subscribe({
             next: (val: any) => {
               this.coreService.openSnackBar('Producto Actualizado');
-              this.displayTable = true;
+              this.mostrarTablaProductos();
             },
             error: (err: any) => {
               console.error(err);
@@ -97,7 +114,7 @@ import {CoreService} from '../../service/core.service';
           next: (val: any) => {
             this.coreService.openSnackBar('Producto Agregado');
             this.getProductos();
-            this.displayTable = true;
+            this.mostrarTablaProductos();
           },
           error: (err: any) => {
             console.error(err);
@@ -107,8 +124,30 @@ import {CoreService} from '../../service/core.service';
     }
   }
 
+  mostrarCRUD() {
+    this.panelCRUD = true;
+    this.panelCompania = false;
+    this.panelProductos = false;
+  }
+
+  mostrarTablaProductos() {
+    this.panelCRUD = false;
+    this.panelCompania = false;
+    this.panelProductos = true;
+  }
+
+  mostrarTablaCompanias() {
+    this.panelCRUD = false;
+    this.panelCompania = true;
+    this.panelProductos = false;
+  }
+
   closeCRUD() {
-    this.displayTable = true;
+    this.mostrarTablaProductos();
+  }
+
+  setCompania(row) {
+    this.producto.compania = row;
   }
 
 }

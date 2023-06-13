@@ -1,11 +1,9 @@
 import {Compania} from './Compania';
 import {TipoProducto} from './TipoProducto';
+import {AbstractDomainEntity} from './AbstractDomainEntity';
 
-export class Producto {
+export class Producto extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   nombre: string;
   descripcion: string;
   compania: Compania;

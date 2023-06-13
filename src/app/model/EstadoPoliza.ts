@@ -1,8 +1,7 @@
-export class EstadoPoliza {
+import {AbstractDomainEntity} from './AbstractDomainEntity';
+
+export class EstadoPoliza extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   nombre: string;
   descripcion: string;
 }

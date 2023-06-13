@@ -1,10 +1,8 @@
 import {Poliza} from './Poliza';
+import {AbstractDomainEntity} from './AbstractDomainEntity';
 
-export class CuotaPoliza {
+export class CuotaPoliza extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   poliza: Poliza;
   numeroCuota: number;
   fechaRegistrado: Date;

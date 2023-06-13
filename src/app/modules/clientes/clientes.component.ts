@@ -151,7 +151,6 @@ import {CoreService} from '../../service/core.service';
   }
 
   setRecomendado(row) {
-    console.log('entre ');
     this.cliente.recomendadoPor = row;
     this.nombreRecomendado = this.getRecomendadoPor();
     this.mostrarCRUD();

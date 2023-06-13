@@ -3,9 +3,19 @@ import {UsuarioService} from '../../service/usuario.service';
 import {Usuario} from '../../model/Usuario';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material';
+import {ErrorStateMatcher, MatSort} from '@angular/material';
 import {MatDialog} from '@angular/material/dialog';
 import {CoreService} from '../../service/core.service';
+import {TipoUsuarioService} from '../../service/tipoUsuario.service';
+import {TipoUsuario} from '../../model/TipoUsuario';
+import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-usuarios',
@@ -17,23 +27,29 @@ import {CoreService} from '../../service/core.service';
   titulo = 'Usuarios';
   tituloFormulario = 'Usuario';
   usuario: Usuario = new Usuario();
+  tipoUsuario: TipoUsuario = new TipoUsuario();
+  pass = '';
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
-    'descripcion',
+    'tipoUsuario',
     'action',
   ];
+  matcher = new MyErrorStateMatcher();
   displayTable = true;
-  dataSource!: MatTableDataSource<any>;
+  usuarios!: MatTableDataSource<any>;
+  tipoUsuarioList!: TipoUsuario[];
   @ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static : false}) sort!: MatSort;
 
 
   constructor(private dialog: MatDialog,
               private usuarioService: UsuarioService,
-              private coreService: CoreService) { }
+              private coreService: CoreService,
+              private tipoUsuarioService: TipoUsuarioService) { }
 
-  ngOnInit() {
+ngOnInit() {
+    this.getTipoUsuarios();
     this.getUsuarios();
   }
 
@@ -42,12 +58,21 @@ import {CoreService} from '../../service/core.service';
     this.displayTable = false;
   }
 
+  getTipoUsuarios() {
+    this.tipoUsuarioService.getTipoUsuarios().subscribe({
+      next: (res) => {
+        this.tipoUsuarioList = res;
+      },
+      error: console.log,
+    });
+  }
+
   getUsuarios() {
     this.usuarioService.getUsuarios().subscribe({
       next: (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+        this.usuarios = new MatTableDataSource(res);
+        this.usuarios.sort = this.sort;
+        this.usuarios.paginator = this.paginator;
       },
       error: console.log,
     });
@@ -55,10 +80,10 @@ import {CoreService} from '../../service/core.service';
 
   filtro(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.usuarios.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.usuarios.paginator) {
+      this.usuarios.paginator.firstPage();
     }
   }
 
@@ -93,16 +118,28 @@ import {CoreService} from '../../service/core.service';
             },
           });
       } else {
-        this.usuarioService.saveUsuario(this.usuario).subscribe({
-          next: (val: any) => {
-            this.coreService.openSnackBar('Usuario Agregado');
-            this.getUsuarios();
-            this.displayTable = true;
-          },
-          error: (err: any) => {
-            console.error(err);
-          },
-        });
+        if (this.usuario.tipoUsuario == null) {
+          if (this.tipoUsuario != null) {
+            this.usuario.tipoUsuario = this.tipoUsuario;
+            if (this.usuario.password === this.pass) {
+              this.usuarioService.saveUsuario(this.usuario).subscribe({
+                next: () => {
+                  this.coreService.openSnackBar('Usuario Agregado');
+                  this.getUsuarios();
+                  this.displayTable = true;
+                },
+                error: (err: any) => {
+                  console.error(err);
+                },
+              });
+            } else {
+              this.coreService.openSnackBar('El password no coincide');
+            }
+
+          } else {
+            this.coreService.openSnackBar('Debe ingresar un tipo de usuario');
+          }
+        }
       }
     }
   }

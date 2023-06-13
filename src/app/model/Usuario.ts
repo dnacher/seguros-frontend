@@ -1,10 +1,8 @@
 import {TipoUsuario} from './TipoUsuario';
+import {AbstractDomainEntity} from './AbstractDomainEntity';
 
-export class Usuario {
+export class Usuario extends AbstractDomainEntity {
   id: number;
-  uuid: string;
-  created: Date;
-  updated: Date;
   nombre: string;
   password: string;
   tipoUsuario: TipoUsuario;
