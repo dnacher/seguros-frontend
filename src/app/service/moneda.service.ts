@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Moneda} from '../model/Moneda';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class MonedasService {
-  private baseUrl = 'http://localhost:8080/api/v1/monedas';
+  private baseUrl = `${environment.baseURL}/v1/monedas`;
 
   constructor(private http: HttpClient) {
   }

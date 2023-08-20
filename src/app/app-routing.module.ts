@@ -12,7 +12,6 @@ import {CuotaPolizaComponent} from './modules/cuotaPoliza/cuotaPoliza.component'
 import {EstadoSiniestroComponent} from './modules/estadoSiniestro/estadoSiniestro.component';
 import {EstadoPolizaComponent} from './modules/estadoPoliza/estadoPoliza.component';
 import {FormaPagoComponent} from './modules/formaPago/formaPago.component';
-import {IngresoComponent} from './modules/ingreso/ingreso.component';
 import {MonedaComponent} from './modules/monedas/moneda.component';
 import {PermisoUsuarioComponent} from './modules/permisoUsuario/permisoUsuario.component';
 import {PolizaComponent} from './modules/poliza/poliza.component';
@@ -74,11 +73,6 @@ const routes: Routes = [{
     {
       path: 'forma-pago',
       component: FormaPagoComponent,
-      canActivate: [AuthGuard]
-    },
-    {
-      path: 'ingreso',
-      component: IngresoComponent,
       canActivate: [AuthGuard]
     },
     {

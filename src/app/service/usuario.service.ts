@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Usuario} from '../model/Usuario';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UsuarioService {
-  private baseUrl = 'http://localhost:8080/api/v1/usuarios';
+  private baseUrl = `${environment.baseURL}/v1/usuarios`;
 
   constructor(private http: HttpClient) {
   }

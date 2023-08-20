@@ -1,11 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TipoProductoService} from '../../service/tipoProducto.service';
 import {TipoProducto} from '../../model/TipoProducto';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material';
 import {MatDialog} from '@angular/material/dialog';
 import {CoreService} from '../../service/core.service';
+import {TipoProductoTableComponent} from './tipo-producto-table/tipo-producto-table.component';
+import {ProductoService} from '../../service/producto.service';
 
 @Component({
   selector: 'app-tipo-producto',
@@ -16,88 +15,45 @@ import {CoreService} from '../../service/core.service';
   botonAgregar = 'Agregar Tipo Producto';
   titulo = 'Tipo de Productos';
   tituloFormulario = 'Tipo de Producto';
-  tipoProducto: TipoProducto = new TipoProducto();
-  displayedColumns: string[] = [
-    'uuid',
-    'nombre',
-    'descripcion',
-    'action',
-  ];
-  displayTable = true;
-  dataSource!: MatTableDataSource<any>;
-  @ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
-  @ViewChild(MatSort, {static : false}) sort!: MatSort;
 
+  @ViewChild(TipoProductoTableComponent, {static: false}) tipoProductoTable: TipoProductoTableComponent;
 
   constructor(private dialog: MatDialog,
               private tipoProductoService: TipoProductoService,
+              private productoService: ProductoService,
               private coreService: CoreService) { }
 
   ngOnInit() {
-    this.getTipoProductos();
+    this.tipoProductoService.tipoProductoTable = true;
+    this.tipoProductoService.action = false;
   }
 
   agregar() {
-    this.tipoProducto = new TipoProducto();
-    this.displayTable = false;
-  }
-
-  getTipoProductos() {
-    this.tipoProductoService.getTipoProductos().subscribe({
-      next: (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      error: console.log,
-    });
-  }
-
-  filtro(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  deleteTipoProducto(id: number) {
-    this.tipoProductoService.deleteTipoProductoById(id).subscribe({
-      next: (res) => {
-        this.coreService.openSnackBar('Tipo Producto Eliminado', 'done');
-        this.getTipoProductos();
-      },
-      error: console.log,
-    });
-  }
-
-  openEditForm(data: any) {
-    this.tipoProducto = data;
-    this.displayTable = false;
+    this.tipoProductoService.tipoProducto = new TipoProducto();
+    this.tipoProductoService.tipoProductoTable = false;
   }
 
   onFormSubmit() {
-    if (this.tipoProducto) {
-      console.log(this.tipoProducto);
-      if (this.tipoProducto.id) {
+    if (this.tipoProductoService.tipoProducto) {
+      console.log(this.tipoProductoService.tipoProducto);
+      if (this.tipoProductoService.tipoProducto.id) {
         this.tipoProductoService
-          .updateTipoProducto(this.tipoProducto.id, this.tipoProducto)
+          .updateTipoProducto(this.tipoProductoService.tipoProducto.id, this.tipoProductoService.tipoProducto)
           .subscribe({
             next: (val: any) => {
               this.coreService.openSnackBar('Tipo Producto Actualizado');
-              this.displayTable = true;
+              this.closeCRUD();
             },
             error: (err: any) => {
               console.error(err);
             },
           });
       } else {
-        this.tipoProductoService.saveTipoProducto(this.tipoProducto).subscribe({
+        this.tipoProductoService.saveTipoProducto(this.tipoProductoService.tipoProducto).subscribe({
           next: (val: any) => {
             this.coreService.openSnackBar('Tipo Producto Agregado');
-            this.getTipoProductos();
-            this.displayTable = true;
+            this.tipoProductoTable.getTipoProductos();
+            this.closeCRUD();
           },
           error: (err: any) => {
             console.error(err);
@@ -108,7 +64,14 @@ import {CoreService} from '../../service/core.service';
   }
 
   closeCRUD() {
-    this.displayTable = true;
+    this.tipoProductoService.tipoProductoTable = true;
+    this.tipoProductoService.action = false;
   }
+
+  // setTipoProducto(row) {
+  //   this.tipoProductoService.tipoProducto = row;
+  //   this.tipoProductoService.tipoProductoTable = false;
+  //   this.productoService.panelCRUD = true;
+  // }
 
 }

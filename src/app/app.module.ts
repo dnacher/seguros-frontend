@@ -29,7 +29,6 @@ import {CuotaPolizaComponent} from './modules/cuotaPoliza/cuotaPoliza.component'
 import {EstadoPolizaComponent} from './modules/estadoPoliza/estadoPoliza.component';
 import {EstadoSiniestroComponent} from './modules/estadoSiniestro/estadoSiniestro.component';
 import {FormaPagoComponent} from './modules/formaPago/formaPago.component';
-import {IngresoComponent} from './modules/ingreso/ingreso.component';
 import {MonedaComponent} from './modules/monedas/moneda.component';
 import {PermisoUsuarioComponent} from './modules/permisoUsuario/permisoUsuario.component';
 import {PolizaComponent} from './modules/poliza/poliza.component';
@@ -40,6 +39,8 @@ import {TipoProductoComponent} from './modules/tipoProducto/tipoProducto.compone
 import {TipoUsuarioComponent} from './modules/tipoUsuario/tipoUsuario.component';
 import {UsuarioComponent} from './modules/usuario/usuario.component';
 import {VendedorComponent} from './modules/vendedor/vendedor.component';
+import { CompaniasTablaComponent } from './modules/companias/companias-tabla/companias-tabla.component';
+import { TipoProductoTableComponent } from './modules/tipoProducto/tipo-producto-table/tipo-producto-table.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,6 @@ import {VendedorComponent} from './modules/vendedor/vendedor.component';
     EstadoPolizaComponent,
     EstadoSiniestroComponent,
     FormaPagoComponent,
-    IngresoComponent,
     MonedaComponent,
     PermisoUsuarioComponent,
     PolizaComponent,
@@ -63,7 +63,9 @@ import {VendedorComponent} from './modules/vendedor/vendedor.component';
     TipoProductoComponent,
     TipoUsuarioComponent,
     UsuarioComponent,
-    VendedorComponent
+    VendedorComponent,
+    CompaniasTablaComponent,
+    TipoProductoTableComponent
 
   ],
   imports: [

@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {CotizacionVendedor} from '../model/CotizacionVendedor';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CotizacionVendedoresService {
-  private baseUrl = 'http://localhost:8080/api/v1/cotizacion-vendedores';
+  private baseUrl = `${environment.baseURL}/v1/cotizacion-vendedores`;
 
   constructor(private http: HttpClient) {
   }

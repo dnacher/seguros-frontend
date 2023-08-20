@@ -6,6 +6,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material';
 import {MatDialog} from '@angular/material/dialog';
 import {CoreService} from '../../service/core.service';
+import {CompaniasService} from '../../service/compania.service';
+import {Compania} from '../../model/Compania';
+import {TipoProductoService} from '../../service/tipoProducto.service';
+import {TipoProducto} from '../../model/TipoProducto';
 
 @Component({
   selector: 'app-productos',
@@ -17,9 +21,6 @@ import {CoreService} from '../../service/core.service';
   titulo = 'Productos';
   tituloFormulario = 'Producto';
   producto: Producto = new Producto();
-  panelCRUD = false;
-  panelCompania = false;
-  panelProductos = false;
 
   displayedColumns: string[] = [
     'uuid',
@@ -48,10 +49,13 @@ import {CoreService} from '../../service/core.service';
 
   constructor(private dialog: MatDialog,
               private productoService: ProductoService,
+              private companiaService: CompaniasService,
+              private tipoProductoService: TipoProductoService,
               private coreService: CoreService) { }
 
   ngOnInit() {
     this.getProductos();
+    this.mostrarTablaProductos();
   }
 
   agregar() {
@@ -125,29 +129,43 @@ import {CoreService} from '../../service/core.service';
   }
 
   mostrarCRUD() {
-    this.panelCRUD = true;
-    this.panelCompania = false;
-    this.panelProductos = false;
+    this.tipoProductoService.tipoProducto = new TipoProducto();
+    this.companiaService.compania = new Compania();
+    this.productoService.panelCRUD = true;
+    this.companiaService.companiaTable = false;
+    this.productoService.panelProductos = false;
+    this.tipoProductoService.tipoProductoTable = false;
   }
 
   mostrarTablaProductos() {
-    this.panelCRUD = false;
-    this.panelCompania = false;
-    this.panelProductos = true;
+    this.productoService.panelCRUD = false;
+    this.companiaService.companiaTable = false;
+    this.tipoProductoService.tipoProductoTable = false;
+    this.productoService.panelProductos = true;
   }
 
+  mostrarTablaTipoProductos() {
+    this.productoService.panelCRUD = false;
+    this.companiaService.companiaTable = false;
+    this.productoService.panelProductos = false;
+    this.tipoProductoService.tipoProductoTable = true;
+    this.tipoProductoService.action = true;
+  }
+
+
   mostrarTablaCompanias() {
-    this.panelCRUD = false;
-    this.panelCompania = true;
-    this.panelProductos = false;
+    this.productoService.panelCRUD = false;
+    this.companiaService.companiaTable = true;
+    this.companiaService.action = true;
+    this.productoService.panelProductos = false;
+    this.tipoProductoService.tipoProductoTable = false;
   }
 
   closeCRUD() {
     this.mostrarTablaProductos();
-  }
-
-  setCompania(row) {
-    this.producto.compania = row;
+    this.companiaService.compania = new Compania();
+    this.tipoProductoService.tipoProducto = new TipoProducto();
+    this.tipoProductoService.action = false;
   }
 
 }

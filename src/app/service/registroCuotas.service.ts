@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {RegistroCuotas} from '../model/RegistroCuotas';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class RegistroCuotasService {
-  private baseUrl = 'http://localhost:8080/api/v1/registro-Cuotas';
+  private baseUrl = `${environment.baseURL}/v1/registro-Cuotas`;
 
   constructor(private http: HttpClient) {
   }

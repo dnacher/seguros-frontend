@@ -3,13 +3,14 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Banco} from '../model/Banco';
 import {CuotaPoliza} from '../model/CuotaPoliza';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CuotaPolizaService {
-  private baseUrl = 'http://localhost:8080/api/v1/cuotas-polizas';
+  private baseUrl = `${environment.baseURL}/v1/cuotas-polizas`;
 
   constructor(private http: HttpClient) {
   }

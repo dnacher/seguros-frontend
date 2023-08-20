@@ -18,9 +18,12 @@ import {CoreService} from '../../service/core.service';
   tituloFormulario = 'Vendedor';
   vendedor: Vendedor = new Vendedor();
   displayedColumns: string[] = [
-    'id',
+    'uuid',
     'nombre',
-    'descripcion',
+    'apellido',
+    'direccion',
+    'departamento',
+    'celular',
     'action',
   ];
   displayTable = true;
@@ -34,7 +37,7 @@ import {CoreService} from '../../service/core.service';
               private coreService: CoreService) { }
 
   ngOnInit() {
-    this.getVendedors();
+    this.getVendedores();
   }
 
   agregar() {
@@ -42,8 +45,8 @@ import {CoreService} from '../../service/core.service';
     this.displayTable = false;
   }
 
-  getVendedors() {
-    this.vendedorService.getVendedors().subscribe({
+  getVendedores() {
+    this.vendedorService.getVendedores().subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
@@ -56,7 +59,6 @@ import {CoreService} from '../../service/core.service';
   filtro(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -66,7 +68,7 @@ import {CoreService} from '../../service/core.service';
     this.vendedorService.deleteVendedorById(id).subscribe({
       next: (res) => {
         this.coreService.openSnackBar('Vendedor Eliminado', 'done');
-        this.getVendedors();
+        this.getVendedores();
       },
       error: console.log,
     });
@@ -96,7 +98,7 @@ import {CoreService} from '../../service/core.service';
         this.vendedorService.saveVendedor(this.vendedor).subscribe({
           next: (val: any) => {
             this.coreService.openSnackBar('Vendedor Agregado');
-            this.getVendedors();
+            this.getVendedores();
             this.displayTable = true;
           },
           error: (err: any) => {

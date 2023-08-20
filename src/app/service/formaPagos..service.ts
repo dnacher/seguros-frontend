@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {FormaPago} from '../model/FormaPago';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class FormaPagoService {
-  private baseUrl = 'http://localhost:8080/api/v1/forma-pagos';
+  private baseUrl = `${environment.baseURL}/v1/forma-pagos`;
 
   constructor(private http: HttpClient) {
   }

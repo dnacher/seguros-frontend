@@ -2,18 +2,19 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Vendedor} from '../model/Vendedor';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class VendedorService {
-  private baseUrl = 'http://localhost:8080/api/v1/vendedors';
+  private baseUrl = `${environment.baseURL}/v1/vendedores`;
 
   constructor(private http: HttpClient) {
   }
 
-  getVendedors(): Observable<any> {
+  getVendedores(): Observable<any> {
     return this.http.get(`${this.baseUrl}` + '/');
   }
 

@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Poliza} from '../model/Poliza';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class PolizaService {
-  private baseUrl = 'http://localhost:8080/api/v1/polizas';
+  private baseUrl = `${environment.baseURL}/v1/polizas`;
 
   constructor(private http: HttpClient) {
   }

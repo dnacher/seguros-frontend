@@ -4,8 +4,7 @@ import {Credentials} from '../model/Credentials';
 import { map } from 'rxjs/operators';
 import {Usuario} from '../model/Usuario';
 import {UsuarioService} from './usuario.service';
-import {MatTableDataSource} from '@angular/material/table';
-import {SidebarComponent} from '../shared/components/sidebar/sidebar.component';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +23,13 @@ export class ApiService {
   }
 
   login(creds: Credentials) {
-    return this.http.post('http://localhost:8080/login', creds,{
+    return this.http.post(`${environment.base}/login`, creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
       const body = response.body;
       const headers = response.headers;
 
+      // tslint:disable-next-line:no-non-null-assertion
       const bearerToken = headers.get('Authorization')!;
       const token = bearerToken.replace('Bearer ', '');
       localStorage.setItem('token', token);
@@ -38,7 +38,7 @@ export class ApiService {
         next: (res) => {
           localStorage.setItem('usuarioNombre', res.nombre);
           localStorage.setItem('tipoUsuario', res.tipoUsuario.nombre);
-          localStorage.setItem('pic', 'https://material.angular.io/assets/img/examples/shiba2.jpg');
+          localStorage.setItem('pic', 'shiba2.jpg');
           this.user = res.nombre;
           this.userType = res.tipoUsuario.nombre;
         },

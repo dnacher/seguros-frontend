@@ -54,7 +54,6 @@ export class SidebarComponent implements OnInit {
       new PaginaItem('Poliza', '/poliza', '', false),
       new PaginaItem('Registro de cuotas', '/registro-cuotas', '', false),
       new PaginaItem('Siniestros', '/siniestro', '', false),
-      new PaginaItem('Ingresos', '/ingreso', '', false),
       new PaginaItem('Reportes', null, '', false),
     ];
     this.menuSeguridad = [
