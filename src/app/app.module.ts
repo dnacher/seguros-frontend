@@ -41,6 +41,9 @@ import {UsuarioComponent} from './modules/usuario/usuario.component';
 import {VendedorComponent} from './modules/vendedor/vendedor.component';
 import { CompaniasTablaComponent } from './modules/companias/companias-tabla/companias-tabla.component';
 import { TipoProductoTableComponent } from './modules/tipoProducto/tipo-producto-table/tipo-producto-table.component';
+import { VendedorTableComponent } from './modules/vendedor/vendedor-table/vendedor-table.component';
+import { ProductoTableComponent } from './modules/productos/producto-table/producto-table.component';
+import { CotizacionVendedorTableComponent } from './modules/cotizacionVendedor/cotizacion-vendedor-table/cotizacion-vendedor-table.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { TipoProductoTableComponent } from './modules/tipoProducto/tipo-producto
     UsuarioComponent,
     VendedorComponent,
     CompaniasTablaComponent,
-    TipoProductoTableComponent
+    TipoProductoTableComponent,
+    VendedorTableComponent,
+    ProductoTableComponent,
+    CotizacionVendedorTableComponent
 
   ],
   imports: [

@@ -30,6 +30,7 @@ export class TipoProductoTableComponent implements OnInit {
 
   ngOnInit() {
     this.getTipoProductos();
+    this.productoService.panelProductos = true;
   }
 
   deleteTipoProducto(id: number) {

@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {VendedorService} from '../../service/vendedor.service';
 import {Vendedor} from '../../model/Vendedor';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material';
 import {MatDialog} from '@angular/material/dialog';
 import {CoreService} from '../../service/core.service';
+import {VendedorTableComponent} from './vendedor-table/vendedor-table.component';
 
 @Component({
   selector: 'app-vendedor',
@@ -13,93 +11,49 @@ import {CoreService} from '../../service/core.service';
   styleUrls: ['./vendedor.component.scss']
 })export class VendedorComponent implements OnInit {
 
+  @ViewChild (VendedorTableComponent , {static: false}) vendedorTableComponent: VendedorTableComponent;
+
   botonAgregar = 'Agregar Vendedor';
   titulo = 'Vendedores';
   tituloFormulario = 'Vendedor';
   vendedor: Vendedor = new Vendedor();
-  displayedColumns: string[] = [
-    'uuid',
-    'nombre',
-    'apellido',
-    'direccion',
-    'departamento',
-    'celular',
-    'action',
-  ];
-  displayTable = true;
-  dataSource!: MatTableDataSource<any>;
-  @ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
-  @ViewChild(MatSort, {static : false}) sort!: MatSort;
-
 
   constructor(private dialog: MatDialog,
               private vendedorService: VendedorService,
               private coreService: CoreService) { }
 
-  ngOnInit() {
-    this.getVendedores();
-  }
+  ngOnInit() {}
 
   agregar() {
     this.vendedor = new Vendedor();
-    this.displayTable = false;
+    this.vendedorService.vendedorTable = false;
   }
 
-  getVendedores() {
-    this.vendedorService.getVendedores().subscribe({
-      next: (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      error: console.log,
-    });
-  }
-
-  filtro(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  deleteVendedor(id: number) {
-    this.vendedorService.deleteVendedorById(id).subscribe({
-      next: (res) => {
-        this.coreService.openSnackBar('Vendedor Eliminado', 'done');
-        this.getVendedores();
-      },
-      error: console.log,
-    });
-  }
-
-  openEditForm(data: any) {
-    this.vendedor = data;
-    this.displayTable = false;
+  closeCRUD() {
+    this.vendedorService.vendedorTable = true;
   }
 
   onFormSubmit() {
-    if (this.vendedor) {
-      console.log(this.vendedor);
-      if (this.vendedor.id) {
+    if (this.vendedorService.vendedor) {
+      console.log(this.vendedorService.vendedor);
+      if (this.vendedorService.vendedor.id) {
         this.vendedorService
-          .updateVendedor(this.vendedor.id, this.vendedor)
+          .updateVendedor(this.vendedorService.vendedor.id, this.vendedorService.vendedor)
           .subscribe({
             next: (val: any) => {
               this.coreService.openSnackBar('Vendedor Actualizado');
-              this.displayTable = true;
+              this.vendedorService.vendedorTable = true;
             },
             error: (err: any) => {
               console.error(err);
             },
           });
       } else {
-        this.vendedorService.saveVendedor(this.vendedor).subscribe({
+        this.vendedorService.saveVendedor(this.vendedorService.vendedor).subscribe({
           next: (val: any) => {
             this.coreService.openSnackBar('Vendedor Agregado');
-            this.getVendedores();
-            this.displayTable = true;
+            this.vendedorTableComponent.getVendedores();
+            this.vendedorService.vendedorTable = true;
           },
           error: (err: any) => {
             console.error(err);
@@ -107,10 +61,6 @@ import {CoreService} from '../../service/core.service';
         });
       }
     }
-  }
-
-  closeCRUD() {
-    this.displayTable = true;
   }
 
 }

@@ -10,6 +10,8 @@ import {environment} from '../../environments/environment';
 
 export class VendedorService {
   private baseUrl = `${environment.baseURL}/v1/vendedores`;
+  vendedorTable = true;
+  vendedor: Vendedor = new Vendedor();
 
   constructor(private http: HttpClient) {
   }

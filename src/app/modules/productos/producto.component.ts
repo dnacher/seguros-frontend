@@ -1,15 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProductoService} from '../../service/producto.service';
 import {Producto} from '../../model/Producto';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material';
 import {MatDialog} from '@angular/material/dialog';
 import {CoreService} from '../../service/core.service';
 import {CompaniasService} from '../../service/compania.service';
 import {Compania} from '../../model/Compania';
 import {TipoProductoService} from '../../service/tipoProducto.service';
 import {TipoProducto} from '../../model/TipoProducto';
+import {ProductoTableComponent} from './producto-table/producto-table.component';
 
 @Component({
   selector: 'app-productos',
@@ -17,21 +15,10 @@ import {TipoProducto} from '../../model/TipoProducto';
   styleUrls: ['./producto.component.scss']
 })export class ProductoComponent implements OnInit {
 
-  botonAgregar = 'Agregar Producto';
-  titulo = 'Productos';
-  tituloFormulario = 'Producto';
-  producto: Producto = new Producto();
+  @ViewChild (ProductoTableComponent, {static: false}) productoTable: ProductoTableComponent;
 
-  displayedColumns: string[] = [
-    'uuid',
-    'nombre',
-    'descripcion',
-    'compania',
-    'tipoProducto',
-    'comisionNueva',
-    'comisionRenovacion',
-    'action',
-  ];
+  botonAgregar = 'Agregar Producto';
+
   columnaProducto: string[] = [
     'uuid',
     'nombre',
@@ -42,10 +29,6 @@ import {TipoProducto} from '../../model/TipoProducto';
     'numeroAuxilio',
     'action',
   ];
-  dataSource!: MatTableDataSource<any>;
-  @ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
-  @ViewChild(MatSort, {static : false}) sort!: MatSort;
-
 
   constructor(private dialog: MatDialog,
               private productoService: ProductoService,
@@ -54,56 +37,21 @@ import {TipoProducto} from '../../model/TipoProducto';
               private coreService: CoreService) { }
 
   ngOnInit() {
-    this.getProductos();
     this.mostrarTablaProductos();
+    console.log(this.productoService.panelProductos);
   }
 
   agregar() {
-    this.producto = new Producto();
-    this.mostrarCRUD();
-  }
-
-  getProductos() {
-    this.productoService.getProductos().subscribe({
-      next: (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      error: console.log,
-    });
-  }
-
-  filtro(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  deleteProducto(id: number) {
-    this.productoService.deleteProductoById(id).subscribe({
-      next: (res) => {
-        this.coreService.openSnackBar('Producto Eliminado', 'done');
-        this.getProductos();
-      },
-      error: console.log,
-    });
-  }
-
-  openEditForm(data: any) {
-    this.producto = data;
+    this.productoService.producto = new Producto();
     this.mostrarCRUD();
   }
 
   onFormSubmit() {
-    if (this.producto) {
-      console.log(this.producto);
-      if (this.producto.id) {
+    if (this.productoService.producto) {
+      console.log(this.productoService.producto);
+      if (this.productoService.producto.id) {
         this.productoService
-          .updateProducto(this.producto.id, this.producto)
+          .updateProducto(this.productoService.producto.id, this.productoService.producto)
           .subscribe({
             next: (val: any) => {
               this.coreService.openSnackBar('Producto Actualizado');
@@ -114,10 +62,10 @@ import {TipoProducto} from '../../model/TipoProducto';
             },
           });
       } else {
-        this.productoService.saveProducto(this.producto).subscribe({
+        this.productoService.saveProducto(this.productoService.producto).subscribe({
           next: (val: any) => {
             this.coreService.openSnackBar('Producto Agregado');
-            this.getProductos();
+            this.productoTable.getProductos();
             this.mostrarTablaProductos();
           },
           error: (err: any) => {
@@ -151,7 +99,6 @@ import {TipoProducto} from '../../model/TipoProducto';
     this.tipoProductoService.tipoProductoTable = true;
     this.tipoProductoService.action = true;
   }
-
 
   mostrarTablaCompanias() {
     this.productoService.panelCRUD = false;

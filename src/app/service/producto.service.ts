@@ -13,6 +13,10 @@ export class ProductoService {
   private baseUrl = `${environment.baseURL}/v1/productos`;
   panelCRUD = false;
   panelProductos = false;
+  producto: Producto = new Producto();
+  action = false;
+  titulo = 'Productos';
+  tituloFormulario = 'Producto';
 
   constructor(private http: HttpClient) {
   }
